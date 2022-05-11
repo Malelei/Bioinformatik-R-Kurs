@@ -1,0 +1,23 @@
+### Übung 2
+### Aufgabe 2.2
+## program to open textfile and align sequences
+
+setwd("/Users/macbook/Documents/ML/MLs Zukunft/Studium/Biochemie FU/3.Semester/Bioinformatik")
+data <- read.table("alignedSequencesCalmodulin.txt", header=F)
+data
+
+str(data)
+
+t(data)
+
+Seq <- data$V1
+
+seq_1 <- Seq[1]
+seq_2 <- Seq[2]
+A <- nchar(seq_2)
+B <- nchar(seq_2 == seq_1)
+
+Prozent_Übereinstimmung <- (A-B)/A*100
+Prozent_Übereinstimmung
+
+# angewandt ergibt sich ein Ergebnis von 96.66667% Übereinstimmung
