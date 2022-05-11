@@ -1,0 +1,26 @@
+ setwd("/Users/macbook/Documents/ML/MLs Zukunft/Studium/Biochemie FU/3.Semester/Bioinformatik")
+ data <- read.table("alignedSequencesCalmodulin.txt", header=F)
+ 
+ t(data)
+ 
+ Seq <- data$V1
+ 
+ seq_1 <- Seq[1]
+ seq_2 <- Seq[2]
+ 
+#install biostrings
+ if (!requireNamespace("BiocManager", quietly = TRUE))
+   install.packages("BiocManager")
+ 
+ BiocManager::install("Biostrings")
+ library(biostrings)
+ 
+ Sequences <- expand.grid(seq_1, seq_2)
+ 
+ #creating matrix
+ matrix(score(pairwiseAlignment(Sequences$seq_1, Sequences$seq_2, substitutionMatrix = "BLOSUM62")),
+        nrow = length(seq_1))
+ 
+#or create txt format
+BLOSUM62(seq_1, seq_2, outFormat = "txt")
+ 
