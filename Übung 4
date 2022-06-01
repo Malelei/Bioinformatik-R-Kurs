@@ -1,0 +1,47 @@
+##Übung 4
+
+
+# working directory bearbeiten
+setwd("/Users/macbook/Documents/ML/MLs Zukunft/Studium/Biochemie FU/3.Semester/Bioinformatik/Übungen Bioinf/Übung 4 Bioinf")
+
+# Daten einlesen
+data <- read.table("human_ACTG_isoforms.txt", header=F)
+data
+
+str(data)
+t(data)
+#  install.packages("stringr")
+library(stringr)
+
+list_with_seqs <- c(str_split(data$V1[1], ""), str_split(data$V1[2], ""), str_split(data$V1[3], ""), str_split(data$V1[4], ""), str_split(data$V1[5], ""), str_split(data$V1[6], ""), str_split(data$V1[7], ""), str_split(data$V1[8], ""), str_split(data$V1[9], ""))
+list_with_seqs
+
+as.data.frame(list_with_seqs)
+t(list_with_seqs)
+
+sort(table(list_with_seqs[1]),decreasing= TRUE) # erste Zahl in eckigen Klammern greift auf eine der 9 Listen in list_with_lists zu
+sort(table(list_with_seqs[2]),decreasing= TRUE)
+sort(table(list_with_seqs[3]),decreasing= TRUE)
+sort(table(list_with_seqs[4]),decreasing= TRUE)[2] # zweite Zahl in eckigen Klammerngreift auf Position zu
+sort(table(list_with_seqs[5]),decreasing= TRUE)[5]
+sort(table(list_with_seqs[6]),decreasing= TRUE)[6]
+sort(table(list_with_seqs[7]),decreasing= TRUE)[21]
+sort(table(list_with_seqs[8]),decreasing= TRUE)[12]
+sort(table(list_with_seqs[9]),decreasing= TRUE)[21]
+
+# Versuche damit eine Schleife zu kreieren
+for (i in 1:9) {
+  for (j in 1:length(list_with_seqs))
+    xyz <- sort(table(list_with_seqs[i]),decreasing= TRUE)[j]
+}
+
+xyz
+
+for (i in 1:length(list_with_seqs) {
+  xyz <- sort(table(list_with_seqs[[1:9]]),decreasing= TRUE)
+}
+
+xyz
+
+
+
