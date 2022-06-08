@@ -1,0 +1,100 @@
+
+#ÜBUNG 5
+#AUFGABE 3 
+
+## 1. manuelle Variante nachdem unterstehende Schleifenkonstruktionsversuche vergeblich waren
+
+DNA<- ("ACGTTGCATGTCGCATGATGCATGAGAGCT")
+#ML: k=1
+len <- 1
+stri_sub_fun <- function(x) table(stri_sub(x,1:(stri_length(x)-len+1),length = len))
+list<-sapply(DNA, stri_sub_fun)
+list
+which.max(list)
+max <- which.max(list)
+list[max]
+# -->G
+
+#ML: k=2
+len <- 2
+stri_sub_fun <- function(x) table(stri_sub(x,1:(stri_length(x)-len+1),length = len))
+list<-sapply(DNA, stri_sub_fun)
+list
+max <- which.max(list)
+list[max]
+# -->TG
+
+#ML: k=3
+len <- 3
+stri_sub_fun <- function(x) table(stri_sub(x,1:(stri_length(x)-len+1),length = len))
+list<-sapply(DNA, stri_sub_fun)
+list
+max <- which.max(list)
+list[max]
+# -->ATG
+
+#ML: k=4
+len <- 4
+stri_sub_fun <- function(x) table(stri_sub(x,1:(stri_length(x)-len+1),length = len))
+list<-sapply(DNA, stri_sub_fun)
+list
+which.max(list)
+list[7]
+list_sorted<-sort(list, decreasing=TRUE)
+# -->GCAT, CATG
+
+#ML: k=5
+len <- 5
+stri_sub_fun <- function(x) table(stri_sub(x,1:(stri_length(x)-len+1),length = len))
+list<-sapply(DNA, stri_sub_fun)
+list
+max <- which.max(list)
+list[max]
+# -->GCATG
+
+
+
+### 2. loop Versuch
+
+#eingabetext muss als in einzelne character gesplittet vorliegen
+Text <- c("A","C","G","T","T","G","C","A","T","G","T","C","G","C","A","T","G","A","T","G","C","A","T","G","A","G","A","G","C","T")
+
+length(Text)
+k<-5 # hier die länge des gesuchten k-mers eintragen
+Länge <- length(Text) -(k-1)
+
+PatternCount <- function(Text, Pat) {
+  count <-0
+  for(i in 1:Länge){
+    if Text[i + (length(Pat)-1)]
+    count <- count+1
+  }
+  return(count)
+}
+
+
+FrequentWords <- function(Text, k){
+  Pattern <- list()
+  Länge <- length(Text) -(k-1)
+  for (i in 1:Länge) {
+    Pattern <- append(Pattern, Text[i]) #k-mer Sequenzen der einzelnen i-Startpunkte der Pattern-liste hinzufügen
+    count(i) <- PatternCount(Text, Pat)
+  maxCount <- max(count)
+  for (j in 1:Länge) {
+      if count(i) = maxCount
+      append(FrequentPatterns, Text(j,k))
+      final_patterns <- unique(FrequentPatterns) #"streicht" alle Doppelten bzw. gibt alle nur einmal wieder
+      }
+  }
+  return(finalPatterns)
+}
+
+#Ergebnisse für der verschiedenen k
+FrequentWords(Text,k)
+FrequentWords(Text,1)
+FrequentWords(Text,2)
+FrequentWords(Text,3)
+FrequentWords(Text,4)
+FrequentWords(Text,5)
+
+
