@@ -1,0 +1,28 @@
+
+#Übung 6 Aufgabe 6.5
+
+# Münze definieren
+Münze <- c("Kopf", "Zahl")
+class(Münze) <- "Münze" 
+
+# Wurffunktion erstellen
+werfen <- function(x, times = 1, prob = NULL) {
+  sample(x, size = times, replace = TRUE, prob = prob)
+}
+
+set.seed(888)
+
+#Laplace korrigierte Wurffunktion
+coinflip <- function(n){
+  Ereignisse <- werfen(Münze, times=n)
+  p_laplace <- (sum(Ereignisse == "Kopf")+1) / (n+2)
+  return(p_laplace)
+  
+}
+#z.B. mit n=100; Wahrscheinlichkeit für Warfwahrscheinlichkeit muss selbst angegeben werden
+coinflip(100)
+
+#je mehr Durchgänge, desto eher entspricht das Ergebnis dem Durchschnitt. 
+#so variieren bei n=2 die wahrscheinlchkeiten sehr stark. Die La-place-Korrektur hat immer weniger Einfluss auf das Ergebnis.
+#p^ hängt von p ab
+
