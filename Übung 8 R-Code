@@ -1,0 +1,63 @@
+
+#Übung 8
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+data(penguins)
+str(penguins)
+
+# es gibt 344 Beobachtungen von insg. 8 Kategorien/Spalten
+# Die Kategorien der Spalten sind:
+# -species            -> class: factor
+# -island             -> class: factor
+# -bill_length_mm     -> class: numeric
+# -bill_depth_mm      -> class: numeric
+# -flipper_length_mm  -> class: int
+# -body_mass_g        -> class: int
+# -sex                -> class: factor
+# -year               -> class: int
+# zudem gibt es vereinzelte NAs
+
+
+#install.packages("devtools")
+library(devtools)
+#install_github("vqv/ggbiplot")
+library(ggbiplot)
+
+#ich habe erstmal nur die numerischen Spalten genommen, da die anderen nicht verwertet werden können
+penguins.pca <- prcomp(penguins[,c(3:6,8)], center = TRUE,scale. = TRUE) #Fehlermeldung:unendliche/fehlende Werte(NAs)
+
+#Versuch NAs zu entfernen
+penguins2 <- na.omit(penguins)
+
+#erneuter Veruch:
+penguins.pca <- prcomp(penguins2[,c(3:6,8)], center = TRUE,scale. = TRUE)
+
+
+ggbiplot(penguins.pca)
+#es sieht nicht so aus, wie es aussehen sollte. So als wäre die falsche Betrachtungsrichtung gewählt worden...
+
+#Test: was passiert, wenn ich nur ausgewählte Spalten verwende
+str(penguins2)
+penguins.pca_ausgewählt <- prcomp(penguins2[,c(3,4)], center = TRUE,scale. = TRUE)
+ggbiplot(penguins.pca_ausgewählt)
+# -> sieht schon besser aus
+
+# vielleicht war das Beobachtungsjahr (penguins$year) das Problem
+penguins.pca_ohneJahr <- prcomp(penguins2[,c(3:6)], center = TRUE,scale. = TRUE)
+ggbiplot(penguins.pca_ohneJahr)
+#-> wieder zwei Bereiche/Wolken
+
+
+# nochmal versucht die factor Spalten in numerische umzuwandendeln
+neues_penguins <- data.frame(penguins2$bill_length_mm, penguins2$bill_depth_mm, penguins2$flipper_length_mm, penguins2$body_mass_g, as.numeric(penguins2$species),as.numeric(penguins2$island), as.numeric(penguins2$sex))
+#Biplot mit ALLEN außer der Jahreszahl
+pengALLE<- prcomp(neues_penguins[,c(1:7)], center = TRUE,scale. = TRUE)
+ggbiplot(pengALLE)
+
+#incl. Jahreszahl
+letztes_penguins <- data.frame(penguins2$bill_length_mm, penguins2$bill_depth_mm, penguins2$flipper_length_mm, penguins2$body_mass_g, as.numeric(penguins2$species),as.numeric(penguins2$island), as.numeric(penguins2$sex), penguins2$year)
+peng_wirklich_ALLE<- prcomp(letztes_penguins[,c(1:8)], center = TRUE,scale. = TRUE)
+ggbiplot(peng_wirklich_ALLE)
+#sieht am besten aus
+
+
