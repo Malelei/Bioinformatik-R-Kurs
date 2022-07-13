@@ -1,0 +1,54 @@
+
+Übung 9
+
+library(igraph)
+
+# working directory bearbeiten
+setwd("/Users/macbook/Documents/ML/MLs Zukunft/Studium/Biochemie FU/3.Semester/Bioinformatik/Übungen Bioinf/Übung 10 Bioinf")
+
+# Read a csv file, named "mtcars.csv"
+my_data <- read.csv("proteinInteractionNetworkHomoSapiensSmall.csv")
+
+csv.to.igraph(my_data)
+
+make_directed_graph(edges, n = max(edges))
+directed_graph(my_data)
+
+#add_edges(my_data, edges, ..., attr = list())
+
+degree(
+  graph,
+  v = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = FALSE
+)
+
+
+closeness(
+  graph,
+  vids = V(graph),
+  mode = c("out", "in", "all", "total"),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+)
+
+
+betweenness(
+  graph,
+  v = V(graph),
+  directed = TRUE,
+  weights = NULL,
+  nobigint = TRUE,
+  normalized = FALSE,
+  cutoff = -1
+)
+
+edge_betweenness(
+  graph,
+  e = E(graph),
+  directed = TRUE,
+  weights = NULL,
+  cutoff = -1
+)
